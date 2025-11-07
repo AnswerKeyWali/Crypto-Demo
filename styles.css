@@ -1,0 +1,6 @@
+/* small custom tweaks */
+body { background: #0f1720; color: #e6eef8; }
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); }
+.table thead th { color: #cfe7ff; }
+.list-group-item { background: transparent; border: none; color: #dbeafe; }
+small.text-muted { color: #9aa6b2 !important; }
