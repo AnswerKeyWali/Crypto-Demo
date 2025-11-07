@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Demo — Virtual Trading Platform</title>
+
+  <!-- Simple CSS framework (optional) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="#">Crypto Demo (Virtual)</a>
+    <div class="text-white small">Made by Mahesh Meena</div>
+  </nav>
+
+  <main class="container my-4">
+    <div class="row g-3">
+      <div class="col-lg-8">
+        <div class="card p-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0">Market — Top Coins (Live)</h5>
+            <div>
+              <select id="currencySelect" class="form-select form-select-sm">
+                <option value="usd">USD</option>
+                <option value="inr">INR</option>
+                <option value="eur">EUR</option>
+              </select>
+            </div>
+          </div>
+          <div id="coinsTableWrap" class="table-responsive">
+            <table class="table table-hover small" id="coinsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Coin</th>
+                  <th>Price</th>
+                  <th>24h</th>
+                  <th>Market Cap</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="coinsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="chartCard" class="card p-3 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 id="chartTitle" class="mb-0">Price Chart</h5>
+            <div class="small text-muted">Data: CoinGecko (public)</div>
+          </div>
+          <canvas id="priceChart" height="140"></canvas>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card p-3 mb-3">
+          <h6>Wallet (Virtual)</h6>
+          <div class="row gx-2">
+            <div class="col-6">
+              <div class="mb-2 small text-muted">Cash (USD)</div>
+              <div id="cashBalance" class="h4">--</div>
+            </div>
+            <div class="col-6">
+              <div class="mb-2 small text-muted">Portfolio Value</div>
+              <div id="portfolioValue" class="h4">--</div>
+            </div>
+          </div>
+          <div class="mt-3 d-grid">
+            <button id="resetBtn" class="btn btn-outline-danger btn-sm">Reset Demo</button>
+            <button id="exportBtn" class="btn btn-outline-secondary btn-sm mt-2">Export History CSV</button>
+          </div>
+        </div>
+
+        <div class="card p-3 mb-3" style="height:320px;overflow:auto;">
+          <h6>Portfolio</h6>
+          <ul id="portfolioList" class="list-group list-group-flush small"></ul>
+        </div>
+
+        <div class="card p-3">
+          <h6>Order History</h6>
+          <ul id="historyList" class="list-group list-group-flush small" style="max-height:220px;overflow:auto;"></ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Buy/Sell modal -->
+  <div class="modal fade" id="tradeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="tradeTitle" class="modal-title">Trade</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-2 small text-muted">Coin</div>
+          <div id="tradeCoin" class="fw-bold mb-2"></div>
+
+          <label class="form-label small">Type</label>
+          <select id="tradeType" class="form-select form-select-sm mb-2">
+            <option value="buy">Buy</option>
+            <option value="sell">Sell</option>
+          </select>
+
+          <label class="form-label small">Amount (coin units)</label>
+          <input id="tradeAmount" type="number" class="form-control form-control-sm" min="0" step="0.0001">
+
+          <div class="small text-muted mt-2">Estimated cost: <span id="tradeEst">0</span></div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirmTrade" class="btn btn-primary btn-sm">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap + App script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
